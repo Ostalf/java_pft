@@ -40,6 +40,45 @@ public class GroupCreationTests {
         returnToGroupPage();
     }
 
+    @Test
+    public void testContactCreation() throws Exception {
+        gotoContactCreationPage();
+        fillContactCreationForm(new ContactData("Anna", "Yrevna", "Gusennik", "ann28@mail.ru", "Viluiskaya 3", "+79831303737"));
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    private void returnToHomePage() {
+        wd.findElement(By.linkText("home page")).click();
+    }
+
+    private void submitContactCreation() {
+        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    }
+
+    private void fillContactCreationForm(ContactData contactData) {
+        wd.findElement(By.name("firstname")).click();
+        wd.findElement(By.name("firstname")).clear();
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
+        wd.findElement(By.name("middlename")).clear();
+        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
+        wd.findElement(By.name("lastname")).clear();
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+        wd.findElement(By.name("email")).click();
+        wd.findElement(By.name("email")).clear();
+        wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+        wd.findElement(By.name("address")).click();
+        wd.findElement(By.name("address")).clear();
+        wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
+        wd.findElement(By.name("mobile")).click();
+        wd.findElement(By.name("mobile")).clear();
+        wd.findElement(By.name("mobile")).sendKeys(contactData.getMobilePhoneNumber());
+    }
+
+    private void gotoContactCreationPage() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     private void returnToGroupPage() {
         wd.findElement(By.linkText("group page")).click();
     }
