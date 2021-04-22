@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper extends HelperBase {
+public class GroupHelper extends BaseHelper {
 
 
     public GroupHelper(FirefoxDriver wd) {
@@ -27,6 +27,11 @@ public class GroupHelper extends HelperBase {
 
     public void initGroupCreation() {
         click(By.name("new"));
+    }
+
+
+    public void deleteSelectedGroups() {
+        click(By.name("delete"));
     }
 
     public void selectGroup() {
