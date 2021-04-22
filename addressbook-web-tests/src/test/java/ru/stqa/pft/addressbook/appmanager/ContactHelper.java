@@ -11,7 +11,10 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void submitContactCreation() {
-        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+        click(By.xpath("(//input[@name='submit'])[2]"));
+    }
+    public void submitContactDeletion() {
+        click(By.xpath("//input[@value='Delete']"));
     }
 
     public void fillContactCreationForm(ContactData contactData) {
@@ -21,5 +24,13 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email"),contactData.getEmail());
         type(By.name("address"),contactData.getAddress());
         type(By.name("mobile"),contactData.getMobilePhoneNumber());
+    }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
     }
 }

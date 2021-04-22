@@ -10,11 +10,13 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private BaseHelper baseHelper;
 
     public void init() {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
+        baseHelper = new BaseHelper(wd);
         contactHelper = new ContactHelper(wd);
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
@@ -23,7 +25,7 @@ public class ApplicationManager {
     }
 
     public void returnToHomePage() {
-        wd.findElement(By.linkText("home page")).click();
+        wd.findElement(By.linkText("home")).click();
     }
 
     public void stop() {
@@ -42,4 +44,8 @@ public class ApplicationManager {
     public ContactHelper getContactHelper() {
         return contactHelper;
     }
+    public BaseHelper getBaseHelper(){
+        return baseHelper;
+    }
+
 }

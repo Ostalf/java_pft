@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseHelper {
-    protected FirefoxDriver wd;
+    private FirefoxDriver wd;
 
     public BaseHelper(FirefoxDriver wd) {
         this.wd = wd;
@@ -18,5 +18,8 @@ public class BaseHelper {
         wd.findElement(locator).click();
         wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(text);
+    }
+    public void switchToAlertAccept(){
+        wd.switchTo().alert().accept();
     }
 }
