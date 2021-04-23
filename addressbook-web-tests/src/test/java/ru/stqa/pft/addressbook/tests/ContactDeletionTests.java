@@ -7,7 +7,7 @@ public class ContactDeletionTests extends TestBase {
     public void testContactDeletion() throws Exception {
         app.getContactHelper().selectContact();
         app.getContactHelper().submitContactDeletion();
-        app.getBaseHelper().switchToAlertAccept();
+        app.getContactHelper().switchToAlertAccept();
         app.returnToHomePage();
     }
 }
