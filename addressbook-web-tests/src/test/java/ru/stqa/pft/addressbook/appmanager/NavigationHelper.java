@@ -19,4 +19,8 @@ public class NavigationHelper extends BaseHelper {
     public void gotoContactModificationPage() {
         click(By.xpath("//img[@alt='Edit']"));
     }
+
+    public void returnToHomePage() {
+        click(By.linkText("home"));
+    }
 }

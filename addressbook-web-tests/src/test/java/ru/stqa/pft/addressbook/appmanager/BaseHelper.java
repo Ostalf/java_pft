@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class BaseHelper {
@@ -21,5 +22,13 @@ public class BaseHelper {
     }
     public void switchToAlertAccept(){
         wd.switchTo().alert().accept();
+    }
+    protected boolean isElementPresents(By locator) {
+        try {
+            wd .findElement(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }
