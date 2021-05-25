@@ -8,7 +8,10 @@ public class ContactData {
     private String lastName;
     private String email;
     private String address;
-    private String mobilePhoneNumber;
+    private String mobile;
+    private String home;
+    private String work;
+    private String allPhones;
 
     @Override
     public String toString() {
@@ -17,6 +20,15 @@ public class ContactData {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
     }
 
     public ContactData withId(int id) {
@@ -49,8 +61,18 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withMobilePhoneNumber(String mobilePhoneNumber) {
-        this.mobilePhoneNumber = mobilePhoneNumber;
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactData withWork(String work) {
+        this.work = work;
         return this;
     }
 
@@ -98,7 +120,17 @@ public class ContactData {
         return address;
     }
 
-    public String getMobilePhoneNumber() {
-        return mobilePhoneNumber;
+    public String getMobile() {
+        return mobile;
     }
+
+    public String getHome() {
+        return home;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+
 }

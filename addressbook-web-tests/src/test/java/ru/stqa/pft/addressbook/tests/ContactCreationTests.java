@@ -20,9 +20,9 @@ public class ContactCreationTests extends TestBase {
                 .withLastName("Whatson")
                 .withEmail("ann28@mail.ru")
                 .withAddress("Viluiskaya 3")
-                .withMobilePhoneNumber("+79831303737");
+                .withMobile("+79831303737");
         app.contact().create(contact);
-        app.goTo().homePage();
+
         Contacts after = app.contact().all();
 
         assertThat(after.size(), equalTo(before.size() + 1));

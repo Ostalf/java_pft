@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
@@ -19,19 +20,18 @@ public class ContactDeletionTests extends TestBase {
                     withLastName("Guselnik").
                     withEmail("enn322@mail.ru").
                     withAddress("Lenina 1").
-                    withMobilePhoneNumber("+79831304444"));
+                    withMobile("+79831304444"));
         }
     }
     @Test
     public void testContactDeletion() {
-        app.goTo().homePage();
         Contacts before = app.contact().all();
 
         ContactData deleteContact = before.iterator().next();
         app.contact().delete(deleteContact);
         Contacts after = app.contact().all();
 
-
+        assertEquals(after.size(), before.size()-1);
         assertThat(after, equalTo(before.without(deleteContact)));
     }
 
