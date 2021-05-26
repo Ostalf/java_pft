@@ -1,25 +1,55 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
+
 public class ContactData {
 
     private int id;
+    @Expose
     private String firstName;
+    @Expose
     private String middleName;
+    @Expose
     private String lastName;
+    @Expose
     private String email;
+    @Expose
     private String address;
+    @Expose
     private String mobile;
+    @Expose
     private String home;
+    @Expose
     private String work;
     private String allPhones;
+    private File photo;
 
     @Override
     public String toString() {
         return "ContactData{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", home='" + home + '\'' +
+                ", work='" + work + '\'' +
+                ", allPhones='" + allPhones + '\'' +
+                ", photo=" + photo +
                 '}';
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
     }
 
     public String getAllPhones() {

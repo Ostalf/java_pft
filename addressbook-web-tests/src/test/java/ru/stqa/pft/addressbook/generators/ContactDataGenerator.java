@@ -50,14 +50,14 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData()
-                    .withFirstName(String.format("firstName %s", i))
-                    .withLastName(String.format("lastName %s", i))
-                    .withHome(String.format("99999999 %s", i))
-                    .withMobile(String.format("99999999 %s", i))
-                    .withAddress(String.format("Lenina %s", i))
-                    .withEmail(String.format("someboi %s @gmail.com", i))
-                    .withWork(String.format("999999999 %s", i))
-                    .withMiddleName(String.format("middleName %s", i))
+                    .withFirstName(String.format("firstName%s", i))
+                    .withLastName(String.format("lastName%s", i))
+                    .withHome(String.format("99999999%s", i))
+                    .withMobile(String.format("99999999%s", i))
+                    .withAddress(String.format("Lenina%s", i))
+                    .withEmail(String.format("someboi%s@gmail.com", i))
+                    .withWork(String.format("999999999%s", i))
+                    .withMiddleName(String.format("middleName%s", i))
             );
         }
         return contacts;
