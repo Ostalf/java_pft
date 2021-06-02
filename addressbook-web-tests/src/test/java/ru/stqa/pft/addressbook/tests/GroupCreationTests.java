@@ -16,8 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupCreationTests extends TestBase {
 
@@ -42,14 +41,14 @@ public class GroupCreationTests extends TestBase {
     @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData group) {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         app.group().create(group);
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
-        assertThat(after.size(), equalTo(before.size() + 1));
-        assertThat(after, equalTo(before.withAdded(group.withId(after.stream()
+        assertEquals(after.size(), before.size() + 1);
+        assertEquals(after, before.withAdded(group.withId(after.stream()
                 .max(Comparator.comparing(GroupData::getId))
                 .map(GroupData::getId)
-                .get()))));
+                .get())));
     }
 }
