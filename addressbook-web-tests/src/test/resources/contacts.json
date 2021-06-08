@@ -8,35 +8,5 @@
     "mobile": "999999990",
     "home": "999999990",
     "work": "9999999990"
-  },
-  {
-    "firstName": "firstName1",
-    "middleName": "middleName1",
-    "lastName": "lastName1",
-    "email": "someboi1@gmail.com",
-    "address": "Lenina1",
-    "mobile": "999999991",
-    "home": "999999991",
-    "work": "9999999991"
-  },
-  {
-    "firstName": "firstName2",
-    "middleName": "middleName2",
-    "lastName": "lastName2",
-    "email": "someboi2@gmail.com",
-    "address": "Lenina2",
-    "mobile": "999999992",
-    "home": "999999992",
-    "work": "9999999992"
-  },
-  {
-    "firstName": "firstName3",
-    "middleName": "middleName3",
-    "lastName": "lastName3",
-    "email": "someboi3@gmail.com",
-    "address": "Lenina3",
-    "mobile": "999999993",
-    "home": "999999993",
-    "work": "9999999993"
   }
 ]

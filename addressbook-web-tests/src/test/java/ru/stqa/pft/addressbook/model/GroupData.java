@@ -3,10 +3,9 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name= "group_list")
@@ -22,6 +21,9 @@ public class GroupData {
     @Column(name= "group_header")
     @Type(type = "text")
     private String header;
+
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
+    private Set<ContactData> contacts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -82,6 +84,9 @@ public class GroupData {
                 ", header='" + header + '\'' +
                 ", footer='" + footer + '\'' +
                 '}';
+    }
+    public Set<ContactData> getContacts() {
+        return new Contacts(contacts);
     }
 
     public String getName() {

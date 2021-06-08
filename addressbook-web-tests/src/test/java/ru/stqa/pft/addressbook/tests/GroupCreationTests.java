@@ -30,8 +30,9 @@ public class GroupCreationTests extends TestBase {
                 line = reader.readLine();
             }
             Gson gson = new Gson();
-            List<GroupData> groups =  gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
-            return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+            List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
+            }.getType());
+            return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
@@ -41,8 +42,11 @@ public class GroupCreationTests extends TestBase {
     @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData group) {
         app.goTo().groupPage();
+
         Groups before = app.db().groups();
+
         app.group().create(group);
+
         Groups after = app.db().groups();
 
         assertEquals(after.size(), before.size() + 1);
@@ -50,5 +54,6 @@ public class GroupCreationTests extends TestBase {
                 .max(Comparator.comparing(GroupData::getId))
                 .map(GroupData::getId)
                 .get())));
+        verifyGroupListInUI();
     }
 }

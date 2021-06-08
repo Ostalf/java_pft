@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +24,16 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, GroupData groupData) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("email"), contactData.getEmail());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
+        if (groupData != null) {
+            wd.findElement(By.name("new_group")).sendKeys(groupData.getName());
+        }
     }
 
     public void selectContactById(int id) {
@@ -45,8 +49,8 @@ public class ContactHelper extends BaseHelper {
         click(By.name("update"));
     }
 
-    public void create(ContactData contact) {
-        fillContactForm(contact);
+    public void create(ContactData contact,  GroupData groupData) {
+        fillContactForm(contact, groupData);
         submitContactCreation();
         contactCache = null;
         returnToContactPage();
@@ -55,7 +59,7 @@ public class ContactHelper extends BaseHelper {
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
         initContactModificationById(contact.getId());
-        fillContactForm(contact);
+        fillContactForm(contact, null);
         contactCache = null;
         submitContactModification();
     }
@@ -71,7 +75,6 @@ public class ContactHelper extends BaseHelper {
     public void returnToContactPage() {
         click(By.linkText("home"));
     }
-
 
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
@@ -131,5 +134,18 @@ public class ContactHelper extends BaseHelper {
                 .withHome(home)
                 .withWork(work);
 
+    }
+
+    public void addContactToGroup(String groupName) {
+        wd.findElement(By.name("to_group")).sendKeys(groupName);
+        wd.findElement(By.name("add")).click();
+    }
+
+    public void removeContactFromGroup() {
+        wd.findElement(By.name("remove")).click();
+    }
+
+    public void orderContactsByGroup(String groupName) {
+        wd.findElement(By.name("group")).sendKeys(groupName);
     }
 }

@@ -39,5 +39,10 @@ public class Contacts extends ForwardingSet<ContactData> {
         return contacts;
     }
 
-
+    public ContactData getContactDataById(int id) {
+        return delegate.stream()
+                .filter(contactData -> contactData.getId() == id)
+                .findFirst()
+                .get();
+    }
 }

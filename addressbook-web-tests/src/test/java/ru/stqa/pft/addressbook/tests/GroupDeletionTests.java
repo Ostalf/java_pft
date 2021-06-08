@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 public class GroupDeletionTests extends TestBase {
 
     @BeforeMethod
-    public void ensurePreconditions(){
+    public void ensurePreconditions() {
         app.goTo().groupPage();
         if (app.group().list().size() == 0) {
             app.group().create(new GroupData()
@@ -23,10 +23,14 @@ public class GroupDeletionTests extends TestBase {
     @Test
     public void testGroupDeletion() {
         Groups before = app.db().groups();
+
         GroupData deleteGroup = before.iterator().next();
         app.group().delete(deleteGroup);
+
         Groups after = app.db().groups();
+
         assertEquals(after.size(), before.size() - 1);
         assertEquals(after, before.without(deleteGroup));
+        verifyGroupListInUI();
     }
 }

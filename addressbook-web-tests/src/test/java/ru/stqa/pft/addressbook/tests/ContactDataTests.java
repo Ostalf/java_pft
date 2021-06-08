@@ -18,6 +18,7 @@ public class ContactDataTests extends TestBase {
         assertEquals(contact.getAllPhones(), mergePhones(contactInfoFromEditForm));
         assertEquals(contact.getEmail(), contactInfoFromEditForm.getEmail());
         assertEquals(contact.getAddress(), contactInfoFromEditForm.getAddress());
+        verifyContactListInUI();
     }
 
     private String mergePhones(ContactData contact) {

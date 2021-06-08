@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
-    public void ensurePreconditions(){
+    public void ensurePreconditions() {
         if (app.contact().list().size() == 0) {
             app.goTo().contactCreationPage();
             app.contact().create(new ContactData().
@@ -18,19 +18,22 @@ public class ContactDeletionTests extends TestBase {
                     withLastName("Guselnik").
                     withEmail("enn322@mail.ru").
                     withAddress("Lenina 1").
-                    withMobile("+79831304444"));
+                    withMobile("+79831304444"), null);
         }
     }
+
     @Test
     public void testContactDeletion() {
         Contacts before = app.db().contacts();
 
         ContactData deleteContact = before.iterator().next();
         app.contact().delete(deleteContact);
+
         Contacts after = app.db().contacts();
 
-        assertEquals(after.size(), before.size()-1);
+        assertEquals(after.size(), before.size() - 1);
         assertEquals(after, before.without(deleteContact));
+        verifyContactListInUI();
     }
 
 }
