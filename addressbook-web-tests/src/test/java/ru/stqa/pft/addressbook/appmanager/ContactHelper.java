@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ContactHelper extends BaseHelper {
 
@@ -49,7 +50,7 @@ public class ContactHelper extends BaseHelper {
         click(By.name("update"));
     }
 
-    public void create(ContactData contact,  GroupData groupData) {
+    public void create(ContactData contact, GroupData groupData) {
         fillContactForm(contact, groupData);
         submitContactCreation();
         contactCache = null;
@@ -91,7 +92,7 @@ public class ContactHelper extends BaseHelper {
     private Contacts contactCache = null;
 
     public Contacts all() {
-        if (contactCache != null){
+        if (contactCache != null) {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
@@ -148,4 +149,17 @@ public class ContactHelper extends BaseHelper {
     public void orderContactsByGroup(String groupName) {
         wd.findElement(By.name("group")).sendKeys(groupName);
     }
+
+    public Optional<ContactData> findContactWithoutGroups(Contacts contacts) {
+        return contacts.stream()
+                .filter(contactData -> contactData.getGroups().size() == 0)
+                .findFirst();
+    }
+
+    public Optional<ContactData> findContactWithGroups(Contacts contacts) {
+        return contacts.stream()
+                .filter(contactData -> contactData.getGroups().size() > 0)
+                .findFirst();
+    }
+
 }

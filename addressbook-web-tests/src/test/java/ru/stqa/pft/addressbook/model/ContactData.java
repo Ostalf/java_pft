@@ -217,4 +217,13 @@ public class ContactData {
         groups.add(group);
         return this;
     }
+
+    public ContactData leftGroup(GroupData group) {
+        groups.remove(getGroups().stream()
+                .filter(groupData -> groupData == group)
+                .findFirst()
+                .get());
+        return this;
+    }
+
 }

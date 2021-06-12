@@ -39,10 +39,12 @@ public class Contacts extends ForwardingSet<ContactData> {
         return contacts;
     }
 
-    public ContactData getContactDataById(int id) {
-        return delegate.stream()
-                .filter(contactData -> contactData.getId() == id)
-                .findFirst()
-                .get();
+    public Contacts withoutGroup(ContactData contact, GroupData group) {
+        Contacts contacts = new Contacts(this);
+        contacts.stream()
+                .filter(contactData -> contactData.getId() != contact.getId());
+        contacts.withAdded(contact.leftGroup(group));
+        return contacts;
+
     }
 }
