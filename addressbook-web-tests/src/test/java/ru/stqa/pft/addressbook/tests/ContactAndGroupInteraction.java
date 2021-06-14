@@ -32,8 +32,8 @@ public class ContactAndGroupInteraction extends TestBase {
                     .withFooter("test2")
                     .withHeader("test1"));
         }
-        Optional<ContactData> contacts = app.contact().findContactWithoutGroups(app.db().contacts());
-        if (!contacts.isPresent()) {
+        Optional<ContactData> contactWithoutGroups = app.contact().findContactWithoutGroups(app.db().contacts());
+        if (!contactWithoutGroups.isPresent()) {
             app.goTo().contactCreationPage();
             app.contact().create(new ContactData()
                     .withFirstName("firstName0")
@@ -45,7 +45,23 @@ public class ContactAndGroupInteraction extends TestBase {
                     .withHome("999999990")
                     .withWork("999999990"), null);
         }
+
+        Optional<ContactData> contactWithGroups = app.contact().findContactWithGroups(app.db().contacts());
+        if (!contactWithGroups.isPresent()) {
+            app.goTo().contactCreationPage();
+            app.contact().create(new ContactData()
+                    .withFirstName("firstName0")
+                    .withMiddleName("middleName0")
+                    .withLastName("lastName0")
+                    .withEmail("someboi0@gmail.com")
+                    .withAddress("Lenina0")
+                    .withMobile("999999990")
+                    .withHome("999999990")
+                    .withWork("999999990"), app.db().groups().iterator().next());
+        }
+
     }
+
 
     @Test
     public void testAddContactToGroup() {
@@ -60,7 +76,7 @@ public class ContactAndGroupInteraction extends TestBase {
         Contacts after = app.db().contacts();
 
         before = before.withAdded(contactWithoutGroups.inGroup(group));
-        
+
         assertEquals(after.size(), before.size());
         assertEquals(after, before);
     }
@@ -80,7 +96,7 @@ public class ContactAndGroupInteraction extends TestBase {
         app.contact().selectContactById(contactWithGroups.getId());
         app.contact().removeContactFromGroup();
 
-        Contacts after =  app.db().contacts();
+        Contacts after = app.db().contacts();
 
         app.goTo().homePage();
 
