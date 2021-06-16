@@ -1,4 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
+
 import org.apache.commons.net.telnet.TelnetClient;
 import ru.stqa.pft.mantis.model.MailMessage;
 
@@ -63,7 +64,6 @@ public class JamesHelper {
             out = new PrintStream( telnet.getOutputStream() );
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
